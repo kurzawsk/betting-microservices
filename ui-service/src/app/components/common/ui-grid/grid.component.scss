@@ -1,0 +1,90 @@
+.element-row {
+  position: relative;
+  background: white;
+}
+
+.element-header-row {
+  padding: 0;
+  min-height: 36px;
+  width: 100%;
+  align-content: center;
+  text-align: center;
+  border: none;
+}
+
+.element-cell:last-child {
+  border: none;
+  border-bottom: 1px solid lightgrey;
+}
+
+.element-header-cell {
+  padding: 0;
+  margin: 0 4px 0 4px;
+  text-align: center;
+  border: none;
+  border-bottom: 2px solid lightgrey;
+  background: white;
+}
+
+.element-row {
+  border: none;
+  display: flex;
+  padding: 0;
+  min-height: 32px;
+  text-align: center;
+  align-items: stretch;
+}
+
+.element-cell {
+  border: none;
+  border-bottom: 1px solid lightgrey;
+  padding: 0;
+  margin: 0 4px 0 4px;
+  align-content: center;
+  min-height: 32px;
+  font-size: 13px;
+}
+
+.element-header-cell:last-child {
+  border: none;
+  border-bottom: 2px solid lightgrey;
+}
+
+.mat-row {
+  padding: 0;
+}
+
+.grid-greyed-bg {
+  border-bottom: 1px solid darkgrey !important;
+}
+
+.grid-hidden-header {
+  display: none;
+}
+
+.expanded-row {
+  background: #FAFAFA;
+  font-weight: bold;
+}
+
+.grid-borderless-row {
+  background: #FAFAFA;
+  margin: 0;
+  padding: 0;
+  border-right: none;
+  border-left: none;
+}
+
+.grid-borderless-cell:first-child {
+  border-left: none;
+}
+
+.grid-borderless-cell:last-child {
+  border-right: none;
+}
+
+.text-cell {
+  overflow: auto;
+}
+
+

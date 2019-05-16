@@ -1,0 +1,13 @@
+<mat-list-item style="height: auto; padding-top: 4px;">
+  <span [ngClass]="{'entry-label': label, 'entry-label-empty': !label}">{{label}}</span>
+  <span class="entry-value-container"><a *ngIf="link" class="entry-value dont-break-out link"
+                                         [ngClass]="{'red-border': marked}"
+                                         [ngStyle]="{'color': active? '#007099':'#AAAAAA',
+        'font-weight': active? 'bold':'normal'}" routerLink="{{link}}"
+                                         target="{{newTab ? '_blank':'_self'}}">{{data}}</a>
+  <span *ngIf="!link" class="entry-value dont-break-out"
+        [ngClass]="{'red-border': marked}"
+        [ngStyle]="{'color': active? '#444444':'#AAAAAA',
+        'font-weight': active? 'bold':'normal'}"
+  >{{data}}</span></span>
+</mat-list-item>

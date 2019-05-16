@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: betexplorer-service
+  cloud:
+    config:
+      uri: https://localhost:8088

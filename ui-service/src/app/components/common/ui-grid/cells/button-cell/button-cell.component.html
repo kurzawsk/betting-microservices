@@ -1,0 +1,40 @@
+<ng-container *ngIf="this.buttonType === 'matButton'">
+  <button mat-button *ngIf="row['buttonActions'] && row['buttonParams']"
+          [disabled]="row['buttonParams'] && row['disabled'][columnName] === true"
+          [matTooltip]="row['tooltip'][columnName]"
+          matTooltipPosition="right"
+          (click)="$event.stopPropagation();row['buttonActions'][columnName](row['buttonParams'][columnName])">
+    {{row[columnName]}}
+  </button>
+</ng-container>
+
+<ng-container *ngIf="this.buttonType === 'matRaisedButton'">
+  <button mat-raised-button *ngIf="row['buttonActions'] && row['buttonParams']"
+          [disabled]="row['buttonParams'] && row['disabled'][columnName] === true"
+          [matTooltip]="row['tooltip'][columnName]"
+          matTooltipPosition="right"
+          (click)="$event.stopPropagation();row['buttonActions'][columnName](row['buttonParams'][columnName])">
+    {{row[columnName]}}
+  </button>
+</ng-container>
+
+<ng-container *ngIf="this.buttonType === 'matTableButton'">
+  <button mat-raised-button class="select-table-button" *ngIf="row['buttonActions'] && row['buttonParams']"
+          [disabled]="row['buttonParams'] && row['disabled'][columnName] === true"
+          [matTooltip]="row['tooltip'][columnName]"
+          matTooltipPosition="right"
+          (click)="$event.stopPropagation();row['buttonActions'][columnName](row['buttonParams'][columnName])">
+    {{row[columnName]}}
+  </button>
+</ng-container>
+
+<ng-container *ngIf="this.buttonType === 'matIcon'">
+  <mat-icon
+    *ngIf="row['buttonActions'] && row['buttonParams'] && !(row['buttonParams'] && row['disabled'][columnName] === true)"
+    class="clickable-icon"
+    [matTooltip]="row['tooltip'][columnName]"
+    matTooltipPosition="right"
+    (click)="$event.stopPropagation(); row['buttonActions'][columnName](row['buttonParams'][columnName])">{{iconName}}
+  </mat-icon>
+</ng-container>
+

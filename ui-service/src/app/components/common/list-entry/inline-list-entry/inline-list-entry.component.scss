@@ -1,0 +1,41 @@
+.entry-label {
+  color: #919191;
+  font-size: 0.8em;
+  flex: 45%;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 4px;
+  margin-right: 4px;
+  height: 100%
+}
+
+.entry-label-empty {
+  color: #919191;
+  font-size: 0.8em;
+  flex: 45%;
+  margin-bottom: 4px;
+  margin-right: 4px;
+  height: 100%
+}
+
+.entry-value-container {
+  flex: 55%;
+  min-height: 24px;
+  margin-top: auto;
+  margin-bottom: 4px;
+  margin-right: 4px;
+}
+
+.entry-value {
+  white-space: pre-line;
+  font-size: 0.9em;
+  color: #646464;
+}
+
+.dont-break-out {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-hyphens: manual;
+  -moz-hyphens: manual;
+  -webkit-hyphens: manual;
+  hyphens: manual;
+}

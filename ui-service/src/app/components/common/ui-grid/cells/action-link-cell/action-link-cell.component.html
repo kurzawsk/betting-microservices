@@ -1,0 +1,7 @@
+<p class="link"
+   *ngIf="row['linkActions']
+          && row['linkActions'][columnName]
+          && row['linkParams']
+          && row['linkParams'][columnName]"
+   (click)="row['linkActions'][columnName](row['linkParams'][columnName])"
+>{{row[columnName]}}</p>

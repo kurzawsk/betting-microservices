@@ -1,0 +1,56 @@
+server:
+  port: 8095
+  ssl:
+    enabled: true
+    key-store: classpath:keystore_betexplorer_service.p12
+    key-store-password:
+    key-store-type: PKCS12
+    key-alias: secured_betexplorer_service
+
+eureka:
+  instance:
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
+    statusPageUrl: https://localhost:${server.port}/info
+    healthCheckUrl: https://localhost:${server.port}/health
+    homePageUrl: https://localhost:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: https://localhost:8061/eureka/
+      
+logging:
+  pattern: 
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+  level:
+    org.springframework.security: DEBUG
+
+security:
+  user:
+    password: none
+  oauth2:
+    client:
+      client-id: betexplorer-service
+      client-secret: secret
+      scope: read
+      access-token-uri: https://localhost:9999/oauth/token
+      user-authorization-uri: https://localhost:9999/oauth/authorize
+    resource:
+      token-info-uri: https://localhost:9999/oauth/check_token
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/system_db?useSSL=false&serverTimezone=UTC
+    username: betexplorer
+    password:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+     properties:
+        hibernate:
+          show_sql: true
+          use_sql_comments: true
+          format_sql: true
+          jdbc:
+            time_zone: UTC
+            lob:
+              non_contextual_creation: true

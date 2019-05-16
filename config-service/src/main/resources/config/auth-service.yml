@@ -1,0 +1,38 @@
+server:  
+  port: 9999
+  ssl:
+    key-store: classpath:keystore_auth_service.p12
+    key-store-password:
+    key-store-type: PKCS12
+    key-alias: secured_auth_service
+
+eureka:
+  instance:
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
+    statusPageUrl: https://localhost:${server.port}/info
+    healthCheckUrl: https://localhost:${server.port}/health
+    homePageUrl: https://localhost:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: https://localhost:8061/eureka/
+
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/system_db?useSSL=false&serverTimezone=UTC
+    username: oauth2
+    password:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+     properties:
+        hibernate:
+          jdbc:
+            lob:
+              non_contextual_creation: true
+    
+logging:
+  level:
+    org.springframework.security: DEBUG

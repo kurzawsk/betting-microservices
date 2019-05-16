@@ -1,0 +1,83 @@
+server:
+  port: 8060
+  ssl:
+    enabled: true
+    key-store: classpath:keystore_gateway_service.p12
+    key-store-password:
+    key-store-type: PKCS12
+    key-alias: secured_gateway_service
+
+eureka:
+  instance:
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
+    statusPageUrl: https://localhost:${server.port}/info
+    healthCheckUrl: https://localhost:${server.port}/health
+    homePageUrl: https://localhost:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: https://localhost:8061/eureka/
+
+logging:
+  pattern: 
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+              
+spring:
+  cloud:
+    gateway:
+      httpclient:
+        ssl:
+          trustedX509Certificates:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: auth-service
+        uri: lb://auth-service
+        predicates:
+        - Path=/auth-service/**
+        filters:
+        - RewritePath=/auth-service(?<path>.*), $\{path}
+      - id: employee-service
+        uri: lb://employee-service
+        predicates:
+        - Path=/employee-service/**
+        filters:
+        - RewritePath=/employee-service(?<path>.*), $\{path}
+      - id: department-service
+        uri: lb://department-service
+        predicates:
+        - Path=/department-service/**
+        filters:
+        - RewritePath=/department-service(?<path>.*), $\{path}
+      - id: organization-service
+        uri: lb://organization-service
+        predicates:
+        - Path=/organization-service/**
+        filters:
+        - RewritePath=/organization-service(?<path>.*), $\{path}
+      - id: job-service
+        uri: lb://job-service
+        predicates:
+        - Path=/job-service/**
+        filters:
+        - RewritePath=/job-service(?<path>.*), $\{path}
+      - id: mdm-service
+        uri: lb://mdm-service
+        predicates:
+        - Path=/mdm-service/**
+        filters:
+        - RewritePath=/mdm-service(?<path>.*), $\{path}
+      - id: betexplorer-service
+        uri: lb://betexplorer-service
+        predicates:
+        - Path=/betexplorer-service/**
+        filters:
+        - RewritePath=/betexplorer-service(?<path>.*), $\{path}
+      - id: reporting-service
+        uri: lb://reporting-service
+        predicates:
+        - Path=/reporting-service/**
+        filters:
+        - RewritePath=/reporting-service(?<path>.*), $\{path}

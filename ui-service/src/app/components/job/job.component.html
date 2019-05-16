@@ -1,0 +1,21 @@
+<app-spinner-container #jobSpinner [diameter]="100">
+  <app-grid
+    [columnDefs]="gridColumnsDef"
+    [outerDataSource]="jobDataSource"
+    [paginatorFlag]="true"
+    [dynamicRowWidth]="dynamicRowWidth">
+  </app-grid>
+</app-spinner-container>
+<div *ngIf="(jobExecutionFilterSubject | async).jobId">
+  <app-spinner-container #jobExecutionSpinner [diameter]="100">
+    <p><b>Job Executions</b></p>
+    <app-grid
+      [columnDefs]="jobExecutionsGridColumnsDef"
+      [outerDataSource]="jobExecutionDataSource"
+      [dataFilter]="jobExecutionFilterSubject"
+      [paginatorFlag]="true"
+      [dynamicRowWidth]="jobExecutionsDynamicRowWidth">
+    </app-grid>
+  </app-spinner-container>
+</div>
+

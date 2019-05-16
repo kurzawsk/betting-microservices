@@ -1,0 +1,24 @@
+<ng-container *ngIf="this.authService.isAuthenticated(); else login">
+  <mat-card>
+    <mat-card-content style="background: #3f51b5">
+      <nav mat-tab-nav-bar>
+        <a mat-tab-link
+           *ngFor="let routeLink of routeLinks"
+           [routerLink]="routeLink.link"
+           [active]="activeLinkIndex === routeLink.index">
+          {{routeLink.label}}
+        </a>
+        <div style="flex-grow: 1"></div>
+        <a mat-tab-link matTooltip="Logout" (click)="logout()">{{(this.authService.userInfoSubject | async).user_name}}
+          <mat-icon>exit_to_app</mat-icon>
+        </a>
+      </nav>
+    </mat-card-content>
+  </mat-card>
+  <div style="padding: 24px">
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
+<ng-template #login>
+  <app-login-component></app-login-component>
+</ng-template>

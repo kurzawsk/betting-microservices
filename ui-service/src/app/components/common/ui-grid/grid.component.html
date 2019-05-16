@@ -1,0 +1,83 @@
+<div style="display: inline-block">
+  <div>
+    <mat-table class="data-grid" #table [dataSource]="dataSource" matSort matSortDirection="desc">
+      <ng-container *ngFor="let column of columnDefs.columns" matColumnDef="{{column.name}}">
+
+
+        <!-- Header -->
+        <ng-container *ngIf="column.sortable">
+          <mat-header-cell
+            [ngStyle]="column[internalParameterNames.COLUMN_WIDTH] && {'flex' : column[internalParameterNames.COLUMN_WIDTH], 'height': headerHeight } || {'height': headerHeight }"
+            [ngClass]="{'sticky-header-row': stickyHeader, 'grid-hidden-header': disableHeader}"
+            class="element-header-cell"
+            *matHeaderCellDef mat-sort-header> {{column.label}}
+          </mat-header-cell>
+        </ng-container>
+        <ng-container *ngIf="!column.sortable">
+          <mat-header-cell
+            [ngStyle]="column[internalParameterNames.COLUMN_WIDTH] && {'flex' : column[internalParameterNames.COLUMN_WIDTH], 'height': headerHeight} || {'height': headerHeight }"
+            [ngClass]="{'sticky-header-row': stickyHeader, 'grid-hidden-header': disableHeader}"
+            class="element-header-cell"
+            *matHeaderCellDef> {{column.label}}
+          </mat-header-cell>
+        </ng-container>
+
+        <mat-cell
+          [ngStyle]="column[internalParameterNames.COLUMN_WIDTH] && {'flex' : column[internalParameterNames.COLUMN_WIDTH]}"
+          [ngClass]="{
+                      'grid-greyed-bg': column[internalParameterNames.GREYED_COLUMN_FLAG] === true,
+                      'expanded-detail': false,
+                      'expanded-row' : false,
+                      'grid-borderless-cell': false
+                     }"
+          class="element-cell" *matCellDef="let field">
+
+          <ng-container
+            *ngIf="column.type && (!field.ignoreSpecialCellTypes || !field.ignoreSpecialCellTypes[column.name])">
+            <app-cell
+              style="width: 100%"
+              [ngStyle]="column[internalParameterNames.COLUMN_WIDTH] && {'flex' : column[internalParameterNames.COLUMN_WIDTH]}"
+              [type]="column.type"
+              [row]="field"
+              [columnName]="column.name"></app-cell>
+          </ng-container>
+
+          <ng-container
+            *ngIf="!(column.type && (!field.ignoreSpecialCellTypes || !field.ignoreSpecialCellTypes[column.name]))">
+            <p class="text-cell"
+               [ngStyle]="column[internalParameterNames.COLUMN_WIDTH] && {'flex' : column[internalParameterNames.COLUMN_WIDTH]}">
+              {{field[column.name]}}</p>
+          </ng-container>
+
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row [ngClass]="{
+                        'sticky-header-row': stickyHeader,
+                        'grid-hidden-header': disableHeader,
+                        'grid-borderless-row': false
+                     }"
+                      class="element-header-row"
+                      [style.width.px]="dynamicRowWidth"
+                      [style.minWidth.px]="minWidth"
+                      *matHeaderRowDef="columnDefs.names"
+      ></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: columnDefs.names;"
+               matRipple
+               class="element-row"
+               [style.width.px]="dynamicRowWidth"
+               [style.minWidth.px]="minWidth"
+               [style.font-weight]="this.dataSource.selectedRowId && (this.dataSource.selectedRowId | async) === row['id'] ? 'bold' : 'initial'"
+               (click)="onRowClick(row['id'])"></mat-row>
+
+    </mat-table>
+  </div>
+  <mat-paginator *ngIf="paginatorFlag" #paginator
+                 [length]="(dataSource.pagedSearchResult | async).totalItemsCount"
+                 [pageSize]="dataSource.pagedSearchParams.pageSize"
+                 [pageIndex]="dataSource.pagedSearchParams.pageIndex"
+                 [pageSizeOptions]="[10, 20, 50, 100]"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>

@@ -1,0 +1,32 @@
+<mat-toolbar color="primary">
+  <span class="fill-remaining-space">Login Form</span>
+</mat-toolbar>
+
+<div *ngIf="!isLoggedIn" class="container" novalidate>
+  <app-spinner-container #loginSpinner [diameter]="200">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" class="form">
+
+      <mat-form-field class="form-element">
+        <input matInput placeholder="Username" formControlName="username">
+        <mat-error *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <input matInput placeholder="Password" formControlName="password" type="password">
+        <mat-error *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
+          This field is required
+        </mat-error>
+      </mat-form-field>
+
+      <div class="form-element">
+        <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!loginForm.valid">Login
+        </button>
+      </div>
+
+    </form>
+  </app-spinner-container>
+</div>
+
+

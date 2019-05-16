@@ -1,0 +1,20 @@
+# IntelliJ IDEA specific files and directories
+*.iml
+.idea
+
+# Compiler output and compiled class files
+*.class
+target
+tests.log
+*.log
+
+# Package Files
+*.jar
+*.war
+*.log.*
+
+# virtual machine crash logs
+hs_err_pid*
+
+#properties files for local parameters
+/application.properties

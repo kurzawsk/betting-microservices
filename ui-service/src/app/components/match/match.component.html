@@ -1,0 +1,76 @@
+<div *ngIf="(this.route.paramMap | async ).get('id'); else matchTable" class="full-width">
+  <ng-container *ngIf="singleMatchData; else standaloneSpinner">
+    <div class="three-columns-layout">
+      <mat-list>
+
+        <app-inline-list-entry label="ID"
+                               [data]="singleMatchData.id"></app-inline-list-entry>
+        <app-inline-list-entry label="Home Team"
+                               [data]="singleMatchData.homeTeam.name"
+                               [link]="'/team/'+ singleMatchData.homeTeam.id"></app-inline-list-entry>
+        <app-inline-list-entry label="Away Team"
+                               [data]="singleMatchData.awayTeam.name"
+                               [link]="'/team/'+ singleMatchData.awayTeam.id"></app-inline-list-entry>
+        <app-inline-list-entry label="Source System Name"
+                               [data]="singleMatchData.sourceSystemName"></app-inline-list-entry>
+        <app-inline-list-entry label="Source System Id"
+                               [data]="singleMatchData.sourceSystemId"></app-inline-list-entry>
+      </mat-list>
+    </div>
+    <div class="three-columns-layout">
+      <mat-list>
+        <app-inline-list-entry label="Start Time"
+                               [data]="singleMatchData.startTime | date : 'dd-MM-yyyy, HH:mm:ss'"></app-inline-list-entry>
+        <app-inline-list-entry label="Home Score"
+                               [data]="singleMatchData.homeScore"></app-inline-list-entry>
+        <app-inline-list-entry label="Away Score"
+                               [data]="singleMatchData.awayScore"></app-inline-list-entry>
+        <app-inline-list-entry label="Result Type"
+                               [data]="this.getResultTypeLabel(singleMatchData.resultType)"></app-inline-list-entry>
+        <app-inline-list-entry label="Marked As Finished Time"
+                               [data]="singleMatchData.markedAsFinishedTime | date : 'dd-MM-yyyy, HH:mm:ss'"></app-inline-list-entry>
+      </mat-list>
+    </div>
+  </ng-container>
+</div>
+<br>
+
+<ng-template #matchTable>
+  <div style=" flex-flow: row wrap;">
+    <app-simple-search #matchFilterText placeholder="Team"
+                       (eventEmitter)="this.matchFilterSubject.next(this.getCurrentFilterValue())"></app-simple-search>
+    <label for="resultTypesForm">Result type</label>
+    <form id="resultTypesForm" [formGroup]="form" style="display: inline-block;">
+      <label formArrayName="resultTypes" *ngFor="let resultType of form.controls.resultTypes.controls;let i = index">
+        <input style="margin: 0 10px;" type="checkbox" [formControlName]="i">
+        {{getAllResultTypes()[i].label}}
+      </label>
+    </form>
+  </div>
+  <app-spinner-container #matchSpinner [diameter]="100">
+    <app-grid
+      [columnDefs]="gridColumnsDef"
+      [outerDataSource]="matchDataSource"
+      [paginatorFlag]="true"
+      [dataFilter]="matchFilterSubject"
+      [dynamicRowWidth]="dynamicRowWidth">
+    </app-grid>
+  </app-spinner-container>
+</ng-template>
+
+<div *ngIf="(matchOddFilterSubject | async)['matchId']">
+  <app-spinner-container #matchOddsSpiner [diameter]="100">
+    <p><b>Match Odds</b></p>
+    <app-grid
+      [columnDefs]="matchOddsGridColumnsDef"
+      [outerDataSource]="matchOddDataSource"
+      [dataFilter]="matchOddFilterSubject"
+      [paginatorFlag]="true"
+      [dynamicRowWidth]="matchOddsDynamicRowWidth">
+    </app-grid>
+  </app-spinner-container>
+</div>
+
+<ng-template #standaloneSpinner>
+  <app-progress-spinner [diameter]="100"></app-progress-spinner>
+</ng-template>

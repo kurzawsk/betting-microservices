@@ -1,0 +1,5 @@
+<div [formGroup]="form">
+  <mat-checkbox (click)="$event.stopPropagation();" [formControlName]="formControlName" #checkbox
+                [checked]="row[columnName]"></mat-checkbox>
+</div>
+

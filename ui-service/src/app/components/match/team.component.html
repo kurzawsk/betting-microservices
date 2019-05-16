@@ -1,0 +1,55 @@
+<div *ngIf="(this.route.paramMap | async ).get('id'); else teamTable" class="full-width">
+  <ng-container *ngIf="singleTeamData; else standaloneSpinner">
+    <div class="three-columns-layout">
+      <mat-list>
+
+        <app-inline-list-entry label="ID"
+                               [data]="singleTeamData.id"></app-inline-list-entry>
+        <app-inline-list-entry label="Name"
+                               [data]="singleTeamData.name"></app-inline-list-entry>
+      </mat-list>
+    </div>
+    <div class="three-columns-layout">
+      <mat-list>
+        <app-inline-list-entry label="Alternative names"
+                               [data]="singleTeamData.alternativeNames.join('\n')"></app-inline-list-entry>
+        <app-inline-list-entry label="False names"
+                               [data]="singleTeamData.falseNames.join('\n')"></app-inline-list-entry>
+      </mat-list>
+    </div>
+  </ng-container>
+</div>
+<br>
+
+<ng-template #teamTable>
+  <div style=" flex-flow: row wrap;">
+    <app-simple-search #teamFilterText placeholder="Team"
+                       (eventEmitter)="this.teamFilterSubject.next(this.getCurrentFilterValue())"></app-simple-search>
+  </div>
+  <app-spinner-container #teamSpinner [diameter]="100">
+    <app-grid
+      [columnDefs]="gridColumnsDef"
+      [outerDataSource]="teamDataSource"
+      [paginatorFlag]="true"
+      [dataFilter]="teamFilterSubject"
+      [dynamicRowWidth]="dynamicRowWidth">
+    </app-grid>
+  </app-spinner-container>
+</ng-template>
+
+<div *ngIf="(teamMatchesFilterSubject | async)['teamId']">
+  <app-spinner-container #matchExecutionSpinner [diameter]="100">
+    <p><b>Matches</b></p>
+    <app-grid
+      [columnDefs]="teamMatchesGridColumnsDef"
+      [outerDataSource]="teamMatchesDataSource"
+      [dataFilter]="teamMatchesFilterSubject"
+      [paginatorFlag]="true"
+      [dynamicRowWidth]="teamMatchesDynamicRowWidth">
+    </app-grid>
+  </app-spinner-container>
+</div>
+
+<ng-template #standaloneSpinner>
+  <app-progress-spinner [diameter]="100"></app-progress-spinner>
+</ng-template>

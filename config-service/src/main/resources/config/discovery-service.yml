@@ -1,0 +1,23 @@
+server:
+  port: 8061
+  ssl:
+    enabled: true
+    key-store: classpath:keystore_discovery_service.p12
+    key-store-password:
+    key-store-type: PKCS12
+    key-alias: secured_discovery_service
+
+eureka:
+  instance:
+    hostname: localhost
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
+    statusPageUrl: https://${eureka.instance.hostname}:${server.port}/info
+    healthCheckUrl: https://${eureka.instance.hostname}:${server.port}/health
+    homePageUrl: https://${eureka.instance.hostname}:${server.port}
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: https://${eureka.instance.hostname}:${server.port}/eureka/

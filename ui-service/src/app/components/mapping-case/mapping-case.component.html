@@ -1,0 +1,19 @@
+
+  <div style=" flex-flow: row wrap;">
+    <label for="statusesForm">Status</label>
+    <form id="statusesForm" [formGroup]="form" style="display: inline-block;">
+      <label formArrayName="statuses" *ngFor="let _ of statusesControl;let i = index">
+        <input style="margin: 0 10px;" type="checkbox" [formControlName]="i">
+        {{this.STATUS_LABELS[i].label}}
+      </label>
+    </form>
+  </div>
+  <app-spinner-container #mappingCaseSpinner [diameter]="100">
+    <app-grid
+      [columnDefs]="gridColumnsDef"
+      [outerDataSource]="mappingCaseDataSource"
+      [paginatorFlag]="true"
+      [dataFilter]="mappingCaseFilterSubject"
+      [dynamicRowWidth]="dynamicRowWidth">
+    </app-grid>
+  </app-spinner-container>

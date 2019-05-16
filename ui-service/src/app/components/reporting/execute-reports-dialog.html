@@ -1,0 +1,49 @@
+<div>
+  <b>You are about to execute the following reports:</b>
+  <br>
+  <ul>
+    <li *ngFor="let report of data.reports">
+      {{report.title}} <b>({{report.id}})</b>
+    </li>
+  </ul>
+  <br>
+  <mat-checkbox [(ngModel)]="sendEmail">Send email</mat-checkbox>
+  <br>
+  <mat-checkbox [(ngModel)]="useCustomParameters">Use custom parameters</mat-checkbox>
+  <div *ngIf="useCustomParameters" style="border: 1px dotted">
+    <p>Report dates</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="fromDate" [matDatepicker]="pickerFrom" placeholder="From"
+             (dateInput)="fromDateChanged($event)" (dateChange)="fromDateChanged($event)">
+      <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFrom></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="toDate" [matDatepicker]="pickerTo" placeholder="To"
+             (dateInput)="toDateChanged($event)" (dateChange)="toDateChanged($event)">
+      <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+      <mat-datepicker #pickerTo></mat-datepicker>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-select [(value)]="selectedPredefinedPeriod" (selectionChange)="predefinedPeriodChanged($event)"
+                  placeholder="Predefined period">
+        <mat-option *ngFor="let predefinedPeriod of PREDEFINED_PERIODS" [value]="predefinedPeriod.value">
+          {{predefinedPeriod.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <p *ngIf="this.datesInvalidMessage" style="color: darkred">{{this.datesInvalidMessage}}</p>
+</div>
+
+<mat-dialog-actions align="end">
+  <button [disabled]="this.datesInvalidMessage" mat-button [mat-dialog-close]="useCustomParameters ? { selectedPredefinedPeriod: selectedPredefinedPeriod,
+  fromDate: fromDate,
+  toDate : toDate,
+  sendEmail : sendEmail
+  } : {sendEmail : sendEmail}">Execute
+  </button>
+  <button mat-button [mat-dialog-close]="false">Cancel
+  </button>
+</mat-dialog-actions>

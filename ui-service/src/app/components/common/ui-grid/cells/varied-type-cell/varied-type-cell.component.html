@@ -1,0 +1,8 @@
+<app-cell *ngIf="cellType"
+          [type]="cellType"
+          [columnName]="columnName"
+          [row]="row"
+></app-cell>
+<p *ngIf="!cellType">
+  {{row[columnName]}}
+</p>

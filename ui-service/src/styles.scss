@@ -1,0 +1,221 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+//.material-icons {
+//  font-family: 'Material Icons';
+//  font-weight: normal;
+//  font-style: normal;
+//  font-size: 24px;  /* Preferred icon size */
+//  display: inline-block;
+//  line-height: 1;
+//  text-transform: none;
+//  letter-spacing: normal;
+//  word-wrap: normal;
+//  white-space: nowrap;
+//  direction: ltr;
+//
+//  /* Support for all WebKit browsers. */
+//  -webkit-font-smoothing: antialiased;
+//  /* Support for Safari and Chrome. */
+//  text-rendering: optimizeLegibility;
+//
+//  /* Support for Firefox. */
+//  -moz-osx-font-smoothing: grayscale;
+//
+//  /* Support for IE. */
+//  font-feature-settings: 'liga';
+//}
+
+body, ul, li, p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  min-width: 1280px;
+}
+
+body, div, p, span, a {
+  color: #1c1c1c;
+  font-family: "Frutiger 45 Light", "Frutiger Light", "Frutiger 55 Roman", Frutiger, Arial, Helvetica, sans-serif;
+  border-color: #69696f;
+}
+
+/** common material elements*/
+.mat-focused .mat-form-field-label {
+  color: #009BD2 !important;
+}
+
+.mat-focused .mat-select-arrow {
+  color: #009BD2 !important;
+}
+
+.mat-form-field-ripple {
+  background-color: #009BD2 !important;
+}
+
+.mat-input-ripple {
+  background-color: #009BD2 !important;
+}
+
+.mat-accent .mat-checkbox-input {
+  background-color: #009BD2 !important;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-ripple, .mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
+  background-color: #e60000 !important;
+}
+
+/***/
+
+a {
+  text-decoration: none;
+}
+
+.ubsred {
+  color: #e60000 !important;
+}
+
+.black {
+  color: black;
+}
+
+.red {
+  color: #e60000;
+}
+
+.green {
+  color: #009933;
+}
+
+.blue {
+  color: #4682B4
+}
+
+.grey {
+  color: #BEBEBE
+}
+
+.light-orange {
+  color: #ffae4c
+}
+
+.dark-orange {
+  color: #ff4b0d
+}
+
+.red-bold {
+  color: #e60000;
+  font-weight: bold;
+}
+
+.red-border {
+  border: 1px solid #e60000;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.clear {
+  clear: both;
+  display: block;
+}
+
+.centered {
+  text-align: center;
+}
+
+.link {
+  color: #007099;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #005079 !important;
+}
+
+.mat-expansion-panel-header {
+}
+
+.full-width {
+  width: 100%;
+}
+
+.two-columns-layout {
+  display: inline-block;
+  width: 50%;
+}
+
+.three-columns-layout {
+  display: inline-block;
+  width: 33%;
+}
+
+.mat-dialog-content {
+  height: 100%;
+}
+
+em {
+  font-weight: bold;
+  font-style: normal;
+  color: #919191;
+}
+
+.mat-header-row {
+  /* background-color: #646464  !important;*/
+}
+
+.mat-column-subheaderColumn {
+  /*color: white;*/
+}
+
+.mat-header-cell {
+  height: 100%;
+  /* color: white; */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button.mat-sort-header-button {
+  margin: auto;
+  color: rgba(0, 0, 0, .54);
+  font-weight: bold;
+}
+
+#expand-button, #collapse-button {
+  margin: 5px 5px 5px 0;
+}
+
+.mat-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.mat-sort-header-container {
+}
+
+.mat-sort-header-stem {
+}
+
+.mat-sort-header-indicator {
+}
+
+.mat-sort-header-pointer-left {
+}
+
+.mat-sort-header-pointer-right {
+}
+
+.mat-sort-header-pointer-middle {
+}
+
+.checkbox-colored .mat-checkbox-checked div.mat-checkbox-background {
+  background-color: #DEDFB3 !important;
+}
+

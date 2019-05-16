@@ -1,0 +1,18 @@
+.cell-row {
+  text-align: center;
+  width: 100%;
+}
+
+.split-cell {
+  width: 100%;
+}
+
+.row-with-divider {
+  border-top: thin solid lightgray;
+  width: 100%;
+}
+
+.row-with-divider:first-child {
+  border: none
+}
+

@@ -1,0 +1,17 @@
+<div *ngIf="row[columnName]">
+  <div *ngIf="isArray(row[columnName])">
+    <div class="split-cell" *ngIf="row['divided']">
+      <div class="row-with-divider" *ngFor="let value of row[columnName]">
+        <p class="cell-row">{{value}}</p>
+      </div>
+    </div>
+    <div class="split-cell" *ngIf="!row['divided']">
+      <div *ngFor="let value of row['values']">
+        <p class="cell-row">{{value}}</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!isArray(row[columnName])">
+    <p class="cell-row">{{row[columnName]}}</p>
+  </div>
+</div>

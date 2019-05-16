@@ -1,0 +1,9 @@
+<div class="container">
+  <ng-content></ng-content>
+
+  <app-progress-spinner *ngIf="display;"
+                        [loadingFinishedSubj]="loadingFinishedSubj"
+                        [diameter]="diameter"
+                        class="spinner"
+  ></app-progress-spinner>
+</div>
